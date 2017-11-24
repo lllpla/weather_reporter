@@ -6,6 +6,19 @@ import  'echarts/lib/chart/bar';
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
+import 'echarts/lib/component/legend';
+import 'echarts/lib/component/toolbox'
+import 'echarts/lib/chart/line';
+import 'echarts/lib/component/markLine'
+import 'echarts/lib/component/markPoint'
+
+const style = {
+    chart:{
+        width: 800,
+        height: 400,
+        margin: '0 auto',
+    }
+};
 
 class TempChart extends Component{
 
@@ -18,22 +31,82 @@ class TempChart extends Component{
             return;
         }
         let temp = this.props.temp;
+        let highTemp = temp.map(res=>res.high);
+        let lowTemp = temp.map(res=>res.low);
+        let dates = temp.map(res=>res.date);
+
 
         let myChart = echarts.init(document.getElementById('chart'));
         console.log(myChart);
         // 绘制图表
         myChart.setOption({
-            title: { text: 'ECharts 入门示例' },
-            tooltip: {},
-            xAxis: {
-                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            title: {
+                text: '未来一周气温变化',
             },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data:['最高气温','最低气温']
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis:  {
+                type: 'category',
+                boundaryGap: false,
+                data: dates
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} °C'
+                }
+            },
+            series: [
+                {
+                    name:'最高气温',
+                    type:'line',
+                    data:highTemp,
+                    markPoint: {
+                        data: [
+                            {type: 'max', name: '最大值'},
+                            {type: 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'最低气温',
+                    type:'line',
+                    data:lowTemp,
+                    markPoint: {
+                        data: [
+                            {type: 'max', name: '最大值'},
+                            {type: 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                }
+            ]
+
         });
     }
 
@@ -42,7 +115,7 @@ class TempChart extends Component{
             return null;
         }else {
             return(
-                <div id='chart' style={{ width: 800, height: 400 }}/>
+                <div id='chart' style={style.chart}/>
                 )
         }
     }

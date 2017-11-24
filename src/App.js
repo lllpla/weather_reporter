@@ -14,7 +14,8 @@ const style = {
     page: {
         width: '50%',
         margin: '0 auto',
-        boxShadow: '10px 10px 5px #888888'
+        boxShadow: '10px 10px 5px #888888',
+        border:'1px solid #888888'
     }
 };
 

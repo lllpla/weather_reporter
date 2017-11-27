@@ -5,7 +5,7 @@ import {
     InputGroup,
     InputGroupAddon
 } from "reactstrap";
-import HttpUtil from "./common/HttpUtil";
+import HttpUtil from "./util/HttpUtil";
 import WeatherCard from "./common/WeatherCard";
 import TempChart from "./common/TempChart";
 
@@ -60,7 +60,7 @@ class App extends Component {
 
     render() {
         return (
-            <div style={style.page}>
+            <div class="container">
                 <Breadcrumb tag="nav">
                     <BreadcrumbItem active tag="span">天气查询</BreadcrumbItem>
                 </Breadcrumb>

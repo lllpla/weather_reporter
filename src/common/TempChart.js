@@ -59,7 +59,10 @@ class TempChart extends Component{
                 data:['最高气温','最低气温']
             },
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
             },
             xAxis:  {
                 type: 'category',

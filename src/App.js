@@ -10,14 +10,6 @@ import WeatherCard from "./common/WeatherCard";
 import TempChart from "./common/TempChart";
 
 
-const style = {
-    page: {
-        width: '50%',
-        margin: '0 auto',
-        boxShadow: '10px 10px 5px #888888',
-        border:'1px solid #888888'
-    }
-};
 
 class App extends Component {
 
@@ -62,7 +54,7 @@ class App extends Component {
         return (
             <div class="container">
                 <Breadcrumb tag="nav">
-                    <BreadcrumbItem active tag="span">天气查询</BreadcrumbItem>
+                    <BreadcrumbItem  active tag="span">天气查询</BreadcrumbItem>
                 </Breadcrumb>
                 <InputGroup>
                     <InputGroupAddon>城市名称</InputGroupAddon>
